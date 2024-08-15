@@ -1,0 +1,14 @@
+// Build a circuit with no inputs and one output. That output should always drive 1 (or logic high).
+module top_module(output reg out );
+initial begin 
+ out = 1'b1;
+ end
+endmodule
+// case 2
+module top_module #(parameter HIGH_VALUE = 1'b1)(output out );
+assign out = HIGH_VALUE;
+endmodule
+//case 
+module top_module(output out );
+assign out = 1'b1;
+endmodule
