@@ -1,0 +1,11 @@
+ I designed all the basic logic gates using Verilog—AND, OR, NOT, NAND, NOR, XOR, and XNOR. I also created detailed testbenches to ensure each gate operates correctly.These gates are essential building blocks of digital circuits.
+
+The gates I designed include:
+
+AND: Outputs true only if both inputs are true.
+OR: Outputs true if at least one input is true.
+NOT: Inverts the input.
+NAND: Outputs true unless both inputs are true.
+NOR: Outputs true only if both inputs are false.
+XOR: Outputs true if inputs are different.
+XNOR: Outputs true if inputs are the same.
