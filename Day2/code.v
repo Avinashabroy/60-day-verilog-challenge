@@ -1,18 +1,6 @@
-module basic_gates(
-  input a,b,
-  output and_out,
-  output or_out,//Gate_level 
-  output not_out,
-  output nand_out,
-  output xor_out
-);
-  
-  assign and_out = a & b; // assign means a continous assignment 
-  assign or_out = a | b;
-  assign not_out = ~b;
-  assign nand_out = ~(a & b);
-  assign xor_out = a ^ b;
-  
+module top_module( input in, output out );
+	
+	assign out = in;
+	// Note that wires are directional, so "assign in = out" is not equivalent.
+	
 endmodule
-  
-  
