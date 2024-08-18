@@ -1,0 +1,12 @@
+Verilog Challenge – Day [2]: The Importance of Signal Direction in Continuous Assignment
+
+As I delve deeper into Verilog, I've come across challenges that push me to rethink the basics. One concept that stands out is continuous assignment and its role in directing signal flow.
+
+Challenge: Design a Verilog module with one input and one output that behaves like a wire. The module should simply pass the input signal directly to the output.
+
+
+Key Question: In the process, why is it critical to write assign out = in; rather than assign in = out;?
+
+Consideration:
+
+A continuous assignment assigns the right side to the left side continuously, so any change to the RHS is immediately seen in the LHS. Reflect on the roles of `input` and `output` signals in this context. Understanding which signal drives the other is key to ensuring that the module functions as intended.
