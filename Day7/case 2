@@ -1,0 +1,24 @@
+module full_adder_bhv(a, b, cin, sum, carry);
+input a, b, cin;
+output reg sum, carry;
+
+always @(a or b or cin) begin
+    if (a + b + cin == 0) begin
+        sum = 0;
+        carry = 0;
+    end
+    else if (a + b + cin == 1) begin
+        sum = 1;
+        carry = 0;
+    end
+    else if (a + b + cin == 2) begin
+        sum = 0;
+        carry = 1;
+    end
+    else if (a + b + cin == 3) begin
+        sum = 1;
+        carry = 1;
+    end
+end
+
+endmodule
