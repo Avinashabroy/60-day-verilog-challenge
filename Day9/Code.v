@@ -1,3 +1,4 @@
+//Full Sub
 module Full_subtractor_bhv(a, b, bin, diff, bout);
 input a, b, bin;
 output reg diff, bout;
