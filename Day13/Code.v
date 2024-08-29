@@ -1,4 +1,6 @@
-//
+// I worked on building a circuit to process scancodes from a PS/2 keyboard for a game. The challenge involved recognizing specific scancodes for arrow keys and asserting the correct output using a case statement.
+
+
 module top_module (
     input [15:0] scancode,
     output reg left,
