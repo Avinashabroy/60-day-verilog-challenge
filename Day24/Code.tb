@@ -1,0 +1,44 @@
+module srff_tb;
+  reg [1:0] sr;    // Declare sr as reg
+  reg clk;         // Declare clk as reg
+  wire q, qb;      // Declare q and qb as wires
+
+  // Instantiate the SR flip-flop module
+  srff dut (
+    .sr(sr),       // Connect inputs
+    .clk(clk),
+    .q(q),         // Connect outputs
+    .qb(qb)
+  );
+
+  // Clock generation
+  initial begin
+    clk = 0;
+    forever #2 clk = ~clk;  // Clock toggles every 2 time units
+  end
+
+  // Test stimulus
+  initial begin
+    $dumpfile("srff.vcd");  // VCD file for waveform
+    $dumpvars(1, srff_tb);  // Dump variables for waveform
+
+    // Initialize sr to 00
+    sr = 2'b00;  
+    #5;
+    
+    // Apply stimulus
+    sr = 2'b01;  // Reset
+    #5;
+    
+    sr = 2'b00;  // Hold
+    #5;
+    
+    sr = 2'b11;  // Invalid state
+    #5;
+    
+    sr = 2'b00;  // Hold again
+    #5;
+    
+    $finish();  // End simulation
+  end
+endmodule
