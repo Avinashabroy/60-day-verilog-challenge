@@ -1,0 +1,38 @@
+module D_FF_tb;
+    reg D;
+    reg clk;
+    reg reset;
+    wire Q;
+
+    D_FF uut (
+        .D(D),
+        .clk(clk),
+        .reset(reset),
+        .Q(Q)
+    );
+
+    always begin
+        #10 clk = ~clk; 
+    end
+    initial begin
+        clk = 0;
+        reset = 0;
+        D = 0;
+        reset = 1;
+        #20;
+        reset = 0;  
+        D = 1;
+        #20; 
+        D = 0;
+        #20; 
+        reset = 1;
+        #20;  
+        reset = 0;  
+        D = 1;
+        #20;  
+        D = 0;
+        #20;  
+        $stop;
+    end
+
+endmodule
