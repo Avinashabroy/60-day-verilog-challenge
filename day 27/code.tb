@@ -1,0 +1,59 @@
+module D_FF_tb;
+
+    // Testbench signals
+    reg D;
+    reg clk;
+    reg reset;
+    wire Q;
+
+    // Instantiate the D flip-flop module
+    D_FF uut (
+        .D(D),
+        .clk(clk),
+        .reset(reset),
+        .Q(Q)
+    );
+
+    // Clock generation: 50 MHz clock with a period of 20 ns
+    always begin
+        #10 clk = ~clk;  // Toggle clock every 10 ns
+    end
+
+    // Test stimulus
+    initial begin
+        // Initialize signals
+        clk = 0;
+        reset = 0;
+        D = 0;
+
+        // Apply reset
+        reset = 1;
+        #20;
+        reset = 0;  // Release reset
+
+        // Apply D = 1, observe Q after clock edge
+        D = 1;
+        #20;  // Wait for 1 clock cycle
+        
+        // Apply D = 0, observe Q after clock edge
+        D = 0;
+        #20;  // Wait for 1 clock cycle
+
+        // Apply reset again and observe Q
+        reset = 1;
+        #20;  // Assert reset
+        reset = 0;  // Deassert reset
+
+        // Apply D = 1 again and observe Q
+        D = 1;
+        #20;  // Wait for 1 clock cycle
+
+        // Apply D = 0 again
+        D = 0;
+        #20;  // Wait for 1 clock cycle
+
+        // Finish simulation
+        $stop;
+    end
+
+endmodule
