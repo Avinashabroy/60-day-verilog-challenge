@@ -1,0 +1,66 @@
+
+
+module MS_DD_TB;
+
+	// Inputs
+	reg D;
+	reg clk;
+	reg reset;
+
+	// Outputs
+	wire Q;
+
+	// Instantiate the Unit Under Test (UUT)
+	MasterSlaveDFF uut (
+		.D(D), 
+		.clk(clk), 
+		.reset(reset), 
+		.Q(Q)
+	);
+
+	 initial begin
+        clk = 0;
+        forever #5 clk = ~clk; // Clock period = 10 units (100 MHz)
+    end
+
+    // Testbench sequence
+    initial begin
+        // Initialize Inputs
+        D = 0;
+        reset = 1;
+
+        // Apply Reset (active high)
+        #10 reset = 0; // Deassert reset after 10 units
+
+        // Test Case 1: D = 0, Observe output
+        D = 0;
+        #10; // Wait for a clock cycle
+
+        // Test Case 2: D = 1, Observe output
+        D = 1;
+        #10; // Wait for a clock cycle
+
+        // Test Case 3: D = 0, Observe output
+        D = 0;
+        #10; // Wait for a clock cycle
+
+        // Test Case 4: Toggle D and observe the output
+        D = 1;
+        #10;
+        D = 0;
+        #10;
+        D = 1;
+        #10;
+
+        // Test Reset again
+        #5 reset = 1; // Assert reset
+        #10 reset = 0; // Deassert reset
+
+        // Final simulation time
+        #50;
+        
+        // End the simulation
+        $stop;
+    end
+endmodule
+
