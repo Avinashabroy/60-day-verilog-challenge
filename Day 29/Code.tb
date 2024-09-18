@@ -1,0 +1,63 @@
+`timescale 1ns / 1ps
+
+module tb_d_flip_flop_fsm;
+
+    // Inputs
+    reg clk;
+    reg rst;
+    reg d;
+
+    // Outputs
+    wire q;
+
+    // Instantiate the D Flip-Flop FSM
+    d_flip_flop_fsm uut (
+        .clk(clk),
+        .rst(rst),
+        .d(d),
+        .q(q)
+    );
+
+    // Clock generation
+    always #5 clk = ~clk;  // Generate a clock with 10 ns period (100 MHz)
+
+    initial begin
+        // Initialize inputs
+        clk = 0;
+        rst = 0;
+        d = 0;
+
+        // Apply reset
+        rst = 1;
+        #10;
+        rst = 0;
+
+        // Test case 1: Set d = 0, expect q = 0
+        d = 0;
+        #10;  // Wait for one clock cycle
+
+        // Test case 2: Set d = 1, expect q = 1
+        d = 1;
+        #10;  // Wait for one clock cycle
+
+        // Test case 3: Keep d = 1, expect q = 1
+        #10;  // Wait for one clock cycle
+
+        // Test case 4: Set d = 0, expect q = 0
+        d = 0;
+        #10;  // Wait for one clock cycle
+
+        // Test case 5: Assert reset, expect q = 0
+        rst = 1;
+        #10;
+        rst = 0;
+
+        // Test case 6: Set d = 1 after reset, expect q = 1
+        d = 1;
+        #10;
+
+        // Finish simulation
+        $stop;
+    end
+
+endmodule
