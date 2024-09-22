@@ -1,0 +1,62 @@
+module jkff_fsm_tb;
+
+    // Testbench signals
+    reg clk;          // Clock signal
+    reg j;            // J input
+    reg k;            // K input
+    reg rst;          // Reset signal
+    wire q;           // Output of JK flip-flop
+
+    // Instantiate the JK flip-flop module
+    jkff_fsm uut (
+        .clk(clk),
+        .j(j),
+        .k(k),
+        .rst(rst),
+        .q(q)
+    );
+
+    // Clock generation: 50 MHz clock with a period of 20 ns
+    always begin
+        #10 clk = ~clk;  // Toggle clock every 10 ns
+    end
+
+    // Test stimulus
+    initial begin
+        // Initialize signals
+        clk = 0;
+        rst = 0;
+        j = 0;
+        k = 0;
+
+        // Apply reset to initialize the flip-flop
+        rst = 1;
+        #20;             // Wait for 1 clock cycle
+        rst = 0;         // Release reset
+        
+        // Test case 1: J = 0, K = 0 (Hold state)
+        j = 0; k = 0;
+        #20;             // Wait for 1 clock cycle
+
+        // Test case 2: J = 1, K = 0 (Set state)
+        j = 1; k = 0;
+        #20;             // Wait for 1 clock cycle
+
+        // Test case 3: J = 0, K = 1 (Reset state)
+        j = 0; k = 1;
+        #20;             // Wait for 1 clock cycle
+
+        // Test case 4: J = 1, K = 1 (Toggle state)
+        j = 1; k = 1;
+        #20;             // Wait for 1 clock cycle
+
+        // Test case 5: Apply reset during operation
+        rst = 1;
+        #20;             // Assert reset
+        rst = 0;         // Deassert reset
+
+        // Finish simulation
+        $stop;
+    end
+
+endmodule
