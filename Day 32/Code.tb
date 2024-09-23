@@ -1,0 +1,49 @@
+module t_ff_tb;
+    reg t;           
+    reg clk;      
+    reg clear;       
+    wire q;        
+    t_ff uut (
+        .t(t),
+        .clk(clk),
+        .clear(clear),
+        .q(q)
+    );
+    initial begin
+        clk = 0;
+        forever #10 clk = ~clk
+    end
+    initial begin
+        clear = 1; 
+        t = 0;
+
+        #20;         
+        clear = 0;   
+
+        // Test Case 1: T = 0 (Hold state)
+        t = 0;
+        #20;          // Wait for 20 ns (1 clock cycle)
+
+        // Test Case 2: T = 1 (Toggle state)
+        t = 1;
+        #20;          // Wait for 20 ns
+
+        // Test Case 3: T = 1 (Toggle state again)
+        t = 1;
+        #20;          // Wait for 20 ns
+
+        // Test Case 4: T = 0 (Hold state)
+        t = 0;
+        #20;          // Wait for 20 ns
+
+        // Test Case 5: Apply asynchronous clear during operation
+        clear = 1;
+        #20;          // Assert clear for 20 ns
+        clear = 0;    // Deassert clear
+
+        // Test Case 6: T = 1 after clear
+        t = 1;
+        #20;          // Wait for 20 ns
+        $stop;       
+    end
+endmodule
