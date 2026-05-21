@@ -1,3 +1,209 @@
+# FIFO (First In First Out)
+
+## What is FIFO?
+
+FIFO stands for:
+
+```text
+First In First Out
+```
+
+FIFO is a temporary memory buffer used to store data in the same order it was received.
+
+The first data written into FIFO will be the first data read out.
+
+---
+
+# Real Life Example
+
+FIFO works like a queue.
+
+Example:
+
+```text
+Person A enters queue
+Person B enters queue
+Person C enters queue
+```
+
+Exit order:
+
+```text
+Person A leaves first
+Person B leaves second
+Person C leaves third
+```
+
+FIFO follows the same principle in digital systems.
+
+---
+
+# FIFO in Digital Electronics
+
+FIFO is used to:
+
+- Temporarily store data
+- Transfer data between modules
+- Handle speed mismatch between circuits
+- Maintain data order
+
+FIFO contains:
+
+- Memory
+- Write Pointer
+- Read Pointer
+
+---
+
+# FIFO Operation
+
+## Write Operation
+
+Data is written into FIFO memory.
+
+```verilog
+mem[wr_ptr] <= wr_data;
+```
+
+Write pointer increments after every write.
+
+---
+
+## Read Operation
+
+Data is read from FIFO memory.
+
+```verilog
+rd_data <= mem[rd_ptr];
+```
+
+Read pointer increments after every read.
+
+---
+
+# FIFO Example
+
+Suppose FIFO depth is 4.
+
+## Write Sequence
+
+```text
+Write 10
+Write 20
+Write 30
+```
+
+FIFO contents:
+
+```text
+[10 20 30]
+```
+
+## Read Sequence
+
+```text
+Read -> 10
+Read -> 20
+Read -> 30
+```
+
+The first written data is read first.
+
+---
+
+# Types of FIFO
+
+## 1. Synchronous FIFO
+
+In synchronous FIFO:
+
+```text
+Write clock = Read clock
+```
+
+Both read and write operations use the same clock.
+
+### Features
+
+- Simple design
+- Easy timing analysis
+- Commonly used inside FPGA modules
+
+---
+
+## 2. Asynchronous FIFO
+
+In asynchronous FIFO:
+
+```text
+Write clock != Read clock
+```
+
+Read and write operations use different clocks.
+
+### Features
+
+- Used for clock domain crossing (CDC)
+- More complex design
+- Uses Gray code pointers and synchronizers
+
+---
+
+# FIFO Status Signals
+
+## FULL
+
+FIFO cannot accept more data.
+
+```verilog
+full = 1;
+```
+
+---
+
+## EMPTY
+
+FIFO contains no data.
+
+```verilog
+empty = 1;
+```
+
+---
+
+# FIFO Applications
+
+FIFO is widely used in:
+
+- UART
+- SPI
+- I2C
+- AXI Protocol
+- Ethernet
+- Video Processing
+- DMA Controllers
+- Processor Interfaces
+
+---
+
+# Basic FIFO Block Diagram
+
+```text
+Write Side ---> FIFO Memory ---> Read Side
+```
+
+---
+
+# Key Concept
+
+FIFO always maintains:
+
+```text
+Data Order
+```
+
+The first data written into FIFO will always be the first data read out.
+
 # FIFO Full and Empty Logic Explanation
 
 ## FIFO Basics
